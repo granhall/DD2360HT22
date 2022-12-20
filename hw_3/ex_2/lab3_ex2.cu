@@ -109,6 +109,7 @@ int main(int argc, char **argv) {
   //@@ Launch the GPU Kernel here
   start = get_time();
   gemm <<<dim3(gridWidth, gridHeight), dim3(blockWidth, blockHeight)>>> (deviceA, deviceB, deviceC, numARows, numAColumns, numBRows, numBColumns);
+  cudaDeviceSynchronize();
   end = get_time() - start;
     printf("Kernel time: %f ms \n", end * 1000);
 

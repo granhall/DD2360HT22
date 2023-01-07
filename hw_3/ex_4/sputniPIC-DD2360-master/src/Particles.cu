@@ -478,7 +478,7 @@ int mover_PC_GPU(struct particles* part, struct EMfield* field, struct grid* grd
 
 
     int gridDim = (part->nop + TPB - 1) / TPB;
-    
+
     particle_mover<<<gridDim, TPB>>>(gpupart, gpufield, gpugrd, gpuparam);
     cudaDeviceSynchronize();
 
@@ -537,10 +537,6 @@ int mover_PC_GPU(struct particles* part, struct EMfield* field, struct grid* grd
 
     return(0);
 }
-
-
-
-
 
 /** Interpolation Particle --> Grid: This is for species */
 void interpP2G(struct particles* part, struct interpDensSpecies* ids, struct grid* grd)

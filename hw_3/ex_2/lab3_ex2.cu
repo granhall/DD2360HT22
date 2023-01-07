@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 
-#define DataType float
+#define DataType double
 
 // Compute C = A * B
 __global__ void gemm(DataType *A, DataType *B, DataType *C, int numARows,

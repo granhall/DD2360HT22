@@ -66,8 +66,8 @@ int main(int argc, char **argv) {
     double start = get_time();
     cudaMemcpy(deviceInput1, hostInput1, inputLength * sizeof(DataType), cudaMemcpyHostToDevice);
     cudaMemcpy(deviceInput2, hostInput2, inputLength * sizeof(DataType), cudaMemcpyHostToDevice);
-    double end = get_time() - start;
-    printf("Copy time CPU to GPU: %f ms \n", end * 1000);
+    double end1 = get_time() - start;
+    printf("Copy time CPU to GPU: %f ms \n", end1 * 1000);
 
 
   //@@ Initialize the 1D grid and block dimensions here
@@ -78,17 +78,17 @@ int main(int argc, char **argv) {
   //@@ Launch the GPU Kernel here
     start = get_time();
     vecAdd<<<gridDim, blockDim>>>(deviceInput1, deviceInput2, deviceOutput, inputLength);
-    end = get_time() - start;
-    printf("Kernel time: %f ms \n", end * 1000);
+    double end2 = get_time() - start;
+    printf("Kernel time: %f ms \n", end2 * 1000);
 
 
 
   //@@ Copy the GPU memory back to the CPU here
     start = get_time();
     cudaMemcpy(hostOutput, deviceOutput, inputLength * sizeof(DataType), cudaMemcpyDeviceToHost);
-    end = get_time() - start;
-    printf("Copy time GPU to CPU: %f ms \n", end * 1000);
-
+    double end3 = get_time() - start;
+    printf("Copy time GPU to CPU: %f ms \n", end3 * 1000);
+    printf("Total Execution time: %f ms \n", (end1 + end2 + end3) * 1000);
 
   //@@ Insert code below to compare the output with the reference
     int comparisonCheck = 1;
